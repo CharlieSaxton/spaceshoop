@@ -2,7 +2,7 @@
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
-camera.position.set(0, 3, 12)
+camera.position.set(0, 15, -35)
 
 let renderer = new THREE.WebGLRenderer( { antialias: true } );
 renderer.setClearColor(0x100d29);
@@ -20,16 +20,23 @@ const playerMaterial = new THREE.MeshToonMaterial( {
 });
 
 const player = new THREE.Mesh(playerGeometry, playerMaterial);
-player.rotation.x = 2
+player.rotation.x = 1.5
+camera.lookAt(player.position.x, player.position.y + 15, player.position.z)
 
+const playerLight = new THREE.PointLight( 0xff6b30, 2, 100);
+playerLight.position.set( 0, 0, 0 );
+
+const axesHelper = new THREE.AxesHelper( 50 );
+scene.add( axesHelper );
 
 const playerGroup = new THREE.Group();
 playerGroup.add( player );
+playerGroup.add( playerLight );
 playerGroup.add( camera );
 scene.add(playerGroup)
 
 
-const ambient = new THREE.AmbientLight(0xc7eaff, 0.2);
+const ambient = new THREE.AmbientLight(0xc7eaff, 0.1);
 scene.add(ambient);
 
 
@@ -40,10 +47,19 @@ const torusMaterial = new THREE.MeshToonMaterial( {
 
 
 
-const torusKnot = new THREE.Mesh(new THREE.TorusKnotGeometry( 10, 3, 100, 16 ), torusMaterial);
-torusKnot.position.set(0, 0, -80)
-scene.add( torusKnot );
+createWorld(60, 150, 0x246343, 25);
+createWorld(-20, 50, 0x9e3a85, 15);
 
+
+function createWorld(xCoord, zCoord, colour, size){
+  var worldMaterial = new THREE.MeshToonMaterial( {
+    color: colour,
+    fog: true
+});
+  let globe = new THREE.Mesh( new THREE.SphereGeometry( size, 64, 24 ), worldMaterial );
+  globe.position.set(xCoord, 0, zCoord)
+  scene.add(globe);
+}
 
 // const controls = new OrbitControls(camera, renderer.domElement)
 
@@ -112,7 +128,7 @@ function move(mouseX, mouseY){
     }
 
     try{
-        joystickAngle = Math.atan(mouseXDif/mouseYDif)
+        joystickAngle = Math.atan(mouseYDif,mouseXDif);
     }catch{
         joystickAngle = 0
     }
@@ -141,21 +157,27 @@ function onWindowResize() {
     renderer.render(scene, camera)
 }
 
+const rotationSpeed = 0.000000002;
+const movementSpeed = 0.01;
+const joystickMoveRotateBounds = 30
+
 function animate() {
     if(mouseDown){
-        playerGroup.rotation.y -= joystickAngle * Math.abs(mouseXDif) * 0.0002
+      if(mouseXDif > joystickMoveRotateBounds){
+        playerGroup.rotation.set(playerGroup.rotation.x, playerGroup.rotation.y - rotationSpeed * Math.pow(mouseXDif, 4), playerGroup.rotation.z)
+      }else if(mouseXDif < -joystickMoveRotateBounds){
+        playerGroup.rotation.set(playerGroup.rotation.x, playerGroup.rotation.y + rotationSpeed * Math.pow(mouseXDif, 4), playerGroup.rotation.z)
+      }
 
-        const movementSpeed = 0.01
-
-        var vector = new THREE.Vector3( 0, 1, 0 );
-        vector.applyQuaternion( player.quaternion );
-
+      if(mouseYDif > joystickMoveRotateBounds || mouseYDif < -joystickMoveRotateBounds){
+        var vector = new THREE.Vector3( 0, 0, -1 );
+        vector.applyQuaternion( playerGroup.quaternion );
         playerGroup.position.add( vector.multiplyScalar( movementSpeed * mouseYDif ) );
+      }
     }
     
     requestAnimationFrame( animate );
     renderer.render( scene, camera );
 }
 animate();
-
 
