@@ -49,11 +49,10 @@ camera.lookAt(player.position.x, player.position.y + 15, player.position.z)
 
 const playerLight = new THREE.PointLight( 0xff6b30, 3, 100);
 playerLight.position.set( 0, 0, 0 );
-// playerLight.castShadow = true
 
 
-const axesHelper = new THREE.AxesHelper( 50 );
-scene.add( axesHelper );
+// const axesHelper = new THREE.AxesHelper( 50 );
+// scene.add( axesHelper );
 
 const playerGroup = new THREE.Group();
 playerGroup.add( player );
@@ -225,11 +224,6 @@ function generateRandomNumber(min, max, decimalPlaces = 5) {
   var power = Math.pow(10, decimalPlaces);
   return Math.floor(rand*power) / power;
 }
-
-// const point = new THREE.PointLight(0xc7eaff, 2);
-// point.position.set(0,20,0);
-// point.lookAt(player.position)
-// scene.add( point );
 
 window.addEventListener('resize', onWindowResize, false)
 
