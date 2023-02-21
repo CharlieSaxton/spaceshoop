@@ -9,13 +9,15 @@ const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.inner
 camera.position.set(0, 15, -35)
 
 let renderer = new THREE.WebGLRenderer( { antialias: true } );
-renderer.setClearColor(0x100d29);
+renderer.setClearColor(0x08060f);
 renderer.setPixelRatio( window.devicePixelRatio );
 renderer.setSize( window.innerWidth, window.innerHeight );
 renderer.shadowMap.enabled = true;
 document.body.appendChild(renderer.domElement)
 
 let trail = [];
+
+
 
 
 var player = new THREE.Group();
@@ -45,8 +47,10 @@ fbxLoader.load(
 
 camera.lookAt(player.position.x, player.position.y + 15, player.position.z)
 
-const playerLight = new THREE.PointLight( 0xff6b30, 2, 100);
+const playerLight = new THREE.PointLight( 0xff6b30, 3, 100);
 playerLight.position.set( 0, 0, 0 );
+// playerLight.castShadow = true
+
 
 const axesHelper = new THREE.AxesHelper( 50 );
 scene.add( axesHelper );
@@ -55,12 +59,33 @@ const playerGroup = new THREE.Group();
 playerGroup.add( player );
 playerGroup.add( playerLight );
 playerGroup.add( camera );
+
 scene.add(playerGroup)
 
 
-const ambient = new THREE.AmbientLight(0xc7eaff, 0.05);
+const ambient = new THREE.AmbientLight(0xc7eaff, 0.5);
 scene.add(ambient);
 
+
+
+var starMaterial = new THREE.MeshToonMaterial( {
+  color: 0xfff3db,
+  fog: true
+});
+
+// create stars
+const starGroup = new THREE.Group();
+for(let i = 0; i < 4; i++){
+  const starSide = new THREE.Group();
+  for(let i = 0; i < 250; i++){
+    let star = new THREE.Mesh( new THREE.SphereGeometry( generateRandomNumber(0.05, 1), 6, 6 ), starMaterial )
+    star.position.set(generateRandomNumber(-700, 700), generateRandomNumber(-700, 700), 500)
+    starSide.add(star)
+  }
+  starSide.rotation.y = i * 2;
+  starGroup.add(starSide);
+}
+playerGroup.add(starGroup);
 
 createWorld(60, 230, 0x376942, 20, [ {
   path: 'models/BirchTree_1.fbx', 
@@ -158,6 +183,7 @@ function createWorld(xCoord, zCoord, colour, size, models = [], hasRing = false,
     globeGroup.add(ocean)
   }
   let globe = new THREE.Mesh( new THREE.SphereGeometry( size, 64, 24 ), worldMaterial );
+  globe.recieveShadow = true
   globeGroup.add(globe);
   globeGroup.position.set(xCoord, 0, zCoord)
 
@@ -166,6 +192,10 @@ function createWorld(xCoord, zCoord, colour, size, models = [], hasRing = false,
       fbxLoader.load(
           model.path,
           (object) => {
+              var objectMaterial = new THREE.MeshToonMaterial( {
+                fog: true
+              });
+              object.material = objectMaterial
               var pivot = new THREE.Group();
               let scale = generateRandomNumber(model.scaleRange.min, model.scaleRange.max)
               object.scale.set(scale, scale, scale)
@@ -196,10 +226,10 @@ function generateRandomNumber(min, max, decimalPlaces = 5) {
   return Math.floor(rand*power) / power;
 }
 
-const point = new THREE.PointLight(0xc7eaff, 2);
-point.position.set(0,20,0);
-point.lookAt(player.position)
-scene.add( point );
+// const point = new THREE.PointLight(0xc7eaff, 2);
+// point.position.set(0,20,0);
+// point.lookAt(player.position)
+// scene.add( point );
 
 window.addEventListener('resize', onWindowResize, false)
 
@@ -331,6 +361,7 @@ function animate() {
       }else if(mouseXDif < -joystickMoveRotateBounds){
         playerGroup.rotation.set(playerGroup.rotation.x, playerGroup.rotation.y + rotationSpeed * Math.pow(mouseXDif, 4), playerGroup.rotation.z)
       }
+      starGroup.rotation.set(starGroup.rotation.x, -playerGroup.rotation.y, starGroup.rotation.z)
 
       if(mouseYDif > joystickMoveRotateBounds || mouseYDif < -joystickMoveRotateBounds){
         let trailPiece = new THREE.Mesh( new THREE.SphereGeometry(generateRandomNumber(0.3, 0.7), 12, 12 ), trailMaterialStart );
