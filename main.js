@@ -1,9 +1,12 @@
 // import * as THREE from "./node_modules/three"
+
 import { FBXLoader } from 'https://cdn.skypack.dev/three@0.132.2/examples/jsm/loaders/FBXLoader'
 import { FontLoader, TextGeometry } from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.js';
 import Bender from 'https://cdn.jsdelivr.net/gh/Sean-Bradley/Bender@main/dist/client/bender.js'
 
-import Planets from './planets.json' assert { type: "json" };
+import Planets from "./planets.json" assert { type: 'json' };
+
+let planetsData = Planets.planets
 
 let loading = true;
 let paused = false;
@@ -12,7 +15,7 @@ setTimeout(() =>{
 }, 1000);
 
 
-let planetsData = Planets.planets;
+
 
 const bender = new Bender()
 
@@ -104,6 +107,7 @@ planetsData.forEach(planet =>{
   createplanet(planet)
 })
 
+
 function createplanet(planetData){
   let planetGroup = new THREE.Group();
   let heightMap = new THREE.TextureLoader().load(planetData.landHeightMap)
@@ -117,7 +121,7 @@ function createplanet(planetData){
   planet.recieveShadow = true
   planetGroup.add(planet);
 
-  let planetBounds = new THREE.Mesh( new THREE.SphereGeometry( planetData.size + 15, 64, 24 ),  new THREE.MeshToonMaterial( {color: 0x36bdd9, transparent: true, opacity: 0.2}) );
+  let planetBounds = new THREE.Mesh( new THREE.SphereGeometry( planetData.size + 15, 64, 24 ),  new THREE.MeshToonMaterial( {color: Number(planetData.atmosphereColour), transparent: true, opacity: 0.2}) );
   planetGroup.add(planetBounds);
 
 
@@ -369,18 +373,18 @@ function animate() {
   
       planets.forEach(planet => {
         planet.rotation.y = planet.rotation.y + planetRotationSpeed
-        if(!loading){
-          var playerBB = new THREE.Box3().setFromObject(player)
-          var planetBB = new THREE.Box3().setFromObject(planet);
-          var inPlanetBounds = planetBB.containsBox(playerBB);
-          if(inPlanetBounds){
-            playerGroup.rotation.set(playerGroup.rotation.x, 0, playerGroup.rotation.z)
-            playerGroup.position.set(planet.position.x, playerGroup.position.y, planet.position.z - 100)
-            $("#planet-overlay-" + planet.userData.planetName).show();
-            $("#joystick").hide();
-            paused = true;
-          }
-        }
+        // if(!loading){
+        //   var playerBB = new THREE.Box3().setFromObject(player)
+        //   var planetBB = new THREE.Box3().setFromObject(planet);
+        //   var inPlanetBounds = planetBB.containsBox(playerBB);
+        //   if(inPlanetBounds){
+        //     playerGroup.rotation.set(playerGroup.rotation.x, 0, playerGroup.rotation.z)
+        //     playerGroup.position.set(planet.position.x, playerGroup.position.y, planet.position.z - 100)
+        //     $("#planet-overlay-" + planet.userData.planetName).show();
+        //     $("#joystick").hide();
+        //     paused = true;
+        //   }
+        // }
        
       });
     }

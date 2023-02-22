@@ -1,15 +1,95 @@
 {
     "planets": [
         {
+            "name": "about",
+            "xCoord": 40,
+            "zCoord": 80,
+            "size": 10,
+            "landColour": "0x47EFC7",
+            "landHeightMap": "maps/height-map-3.jpeg",
+            "hasOcean": true,
+            "oceanColour": "0xEF476F",
+            "atmosphereColour": "0x36bdd9",
+            "title": "ABOUT ME    ABOUT ME    ABOUT ME",
+            "titleColour": "0xe1f2f2",
+            "models":
+            [{
+                "path": "models/Rock_1.fbx", 
+                "scaleRange": {"min": 0.01, "max": 0.09}, 
+                "amount": 20
+            }]
+        },
+
+        {
             "name": "droppah",
-            "xCoord": 0,
-            "zCoord": 100,
+            "xCoord": -40,
+            "zCoord": 200,
             "size": 31,
-            "landColour": "0xe1f2f2",
+            "landColour": "0xFFD166",
+            "landHeightMap": "maps/height-map-2.jpeg",
+            "hasOcean": true,
+            "oceanColour": "0x6694FF",
+            "atmosphereColour": "0x36bdd9",
+            "title": "DROPPAH  DROPPAH  DROPPAH  DROPPAH  DROPPAH  DROPPAH",
+            "titleColour": "0xe1f2f2",
+            "models":
+            [{
+                "path": "models/Rock_1.fbx", 
+                "scaleRange": {"min": 0.01, "max": 0.09}, 
+                "amount": 50
+            }]
+        },
+
+        {
+            "name": "vinyl",
+            "xCoord": 50,
+            "zCoord": 300,
+            "size": 17,
+            "landColour": "0x7AE51A",
             "landHeightMap": "maps/height-map-1.jpeg",
             "hasOcean": true,
-            "oceanColour": "0x0f3b75",
-            "title": "DROPPAH  DROPPAH  DROPPAH  DROPPAH  DROPPAH  DROPPAH",
+            "oceanColour": "0x851AE5",
+            "atmosphereColour": "0x36bdd9",
+            "title": "VINYL   VINYL   VINYL   VINYL   VINYL   VINYL",
+            "titleColour": "0xe1f2f2",
+            "models":
+            [{
+                "path": "models/Rock_1.fbx", 
+                "scaleRange": {"min": 0.01, "max": 0.09}, 
+                "amount": 50
+            }]
+        },
+
+        {
+            "name": "kitomba",
+            "xCoord": -120,
+            "zCoord": 400,
+            "size": 23,
+            "landColour": "0xB23911",
+            "landHeightMap": "maps/height-map-2.jpeg",
+            "hasOcean": true,
+            "oceanColour": "0x118AB2",
+            "atmosphereColour": "0x36bdd9",
+            "title": "KITOMBA   KITOMBA   KITOMBA   KITOMBA   KITOMBA",
+            "titleColour": "0xe1f2f2",
+            "models":
+            [{
+                "path": "models/Rock_1.fbx", 
+                "scaleRange": {"min": 0.01, "max": 0.09}, 
+                "amount": 50
+            }]
+        },
+        {
+            "name": "contact",
+            "xCoord": 140,
+            "zCoord": 500,
+            "size": 18,
+            "landColour": "0x2A9D8F",
+            "landHeightMap": "maps/height-map-1.jpeg",
+            "hasOcean": true,
+            "oceanColour": "0x9D2A38",
+            "atmosphereColour": "0x36bdd9",
+            "title": "CONTACT ME   CONTACT ME   CONTACT ME   ",
             "titleColour": "0xe1f2f2",
             "models":
             [{
@@ -19,5 +99,4 @@
             }]
         }
     ]
-   
-}
+} 
