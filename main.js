@@ -3,6 +3,7 @@ import { FBXLoader } from 'https://cdn.skypack.dev/three@0.132.2/examples/jsm/lo
 
 const fbxLoader = new FBXLoader()
 
+const clock = new THREE.Clock();
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
@@ -394,8 +395,8 @@ function onWindowResize() {
     renderer.render(scene, camera)
 }
 
-const rotationSpeed = 0.000000002;
-const movementSpeed = 0.01;
+const rotationSpeed = 0.0000002;
+const movementSpeed = 1;
 const joystickMoveRotateBounds = 30
 
 var trailMaterialStart = new THREE.MeshToonMaterial( {
@@ -431,10 +432,15 @@ function animate() {
     })
 
     if(mouseDown){
+      let deltaTime = clock.getDelta()
+      if(deltaTime > 0.01){
+        deltaTime = 0.01
+      }
+
       if(mouseXDif > joystickMoveRotateBounds){
-        playerGroup.rotation.set(playerGroup.rotation.x, playerGroup.rotation.y - rotationSpeed * Math.pow(mouseXDif, 4), playerGroup.rotation.z)
+        playerGroup.rotation.set(playerGroup.rotation.x, playerGroup.rotation.y - rotationSpeed * Math.pow(mouseXDif, 4) * deltaTime, playerGroup.rotation.z)
       }else if(mouseXDif < -joystickMoveRotateBounds){
-        playerGroup.rotation.set(playerGroup.rotation.x, playerGroup.rotation.y + rotationSpeed * Math.pow(mouseXDif, 4), playerGroup.rotation.z)
+        playerGroup.rotation.set(playerGroup.rotation.x, playerGroup.rotation.y + rotationSpeed * Math.pow(mouseXDif, 4) * deltaTime, playerGroup.rotation.z)
       }
       starGroup.rotation.set(starGroup.rotation.x, -playerGroup.rotation.y, starGroup.rotation.z)
 
@@ -446,9 +452,8 @@ function animate() {
 
         var vector = new THREE.Vector3( 0, 0, -1 );
         vector.applyQuaternion( playerGroup.quaternion );
-        playerGroup.position.add( vector.multiplyScalar( movementSpeed * mouseYDif ) );
 
-     
+        playerGroup.position.add( vector.multiplyScalar( movementSpeed * mouseYDif * deltaTime) );
       }
     }
     
