@@ -4,7 +4,9 @@ body{
     height: 100vh; max-height: 100vh;
     overflow: hidden;
 }
-
+body, html{
+    background-color: #08060f;
+}
 #moving-touch-dot{
     background-color: #000000cd;
     opacity: 0.5;

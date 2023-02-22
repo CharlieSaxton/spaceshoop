@@ -4,302 +4,9 @@ import { FBXLoader } from 'https://cdn.skypack.dev/three@0.132.2/examples/jsm/lo
 import { FontLoader, TextGeometry } from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.js';
 import Bender from 'https://cdn.jsdelivr.net/gh/Sean-Bradley/Bender@main/dist/client/bender.js'
 
-// import Planets from "./planets.json" assert { type: 'json' };
+import Planets from "./planets.json" assert { type: 'json' };
 
-let planetsData = [
-    {
-      name: "about",
-      xCoord: 40,
-      zCoord: 80,
-      size: 10,
-      landColour: "0x47EFC7",
-      landHeightMap: "maps/height-map-3.jpeg",
-      hasOcean: true,
-      oceanColour: "0xEF476F",
-      atmosphereColour: "0x36bdd9",
-      title: "ABOUT ME    ABOUT ME    ABOUT ME",
-      titleColour: "0xe1f2f2",
-      models: [
-        {
-          path: "models/Rock_1.fbx",
-          scaleRange: {
-            min: 0.01,
-            max: 0.09
-          },
-          amount: 5
-        },
-        {
-          path: "models/Rock_2.fbx",
-          scaleRange: {
-            min: 0.01,
-            max: 0.09
-          },
-          amount: 5
-        },
-        {
-          path: "models/Rock_Moss_4.fbx",
-          scaleRange: {
-            min: 0.01,
-            max: 0.09
-          },
-          amount: 7
-        },
-        {
-          path: "models/PineTree_3.fbx",
-          scaleRange: {
-            min: 0.02,
-            max: 0.05
-          },
-          amount: 3
-        },
-        {
-          path: "models/PineTree_2.fbx",
-          scaleRange: {
-            min: 0.02,
-            max: 0.05
-          },
-          amount: 2
-        },
-        {
-          path: "models/PineTree_Autumn_5.fbx",
-          scaleRange: {
-            min: 0.02,
-            max: 0.05
-          },
-          amount: 3
-        }
-      ]
-    },
-    {
-      name: "droppah",
-      xCoord: -40,
-      zCoord: 200,
-      size: 31,
-      landColour: "0xe2faff",
-      landHeightMap: "maps/height-map-2.jpeg",
-      hasOcean: true,
-      oceanColour: "0x2b70ee",
-      atmosphereColour: "0x36bdd9",
-      title: "DROPPAH  DROPPAH  DROPPAH  DROPPAH  DROPPAH  DROPPAH",
-      titleColour: "0xe1f2f2",
-      models: [
-        {
-          path: "models/Rock_Snow_1.fbx",
-          scaleRange: {
-            min: 0.04,
-            max: 0.11
-          },
-          amount: 5
-        },
-        {
-          path: "models/Rock_Snow_2.fbx",
-          scaleRange: {
-            min: 0.04,
-            max: 0.11
-          },
-          amount: 5
-        },
-        {
-          path: "models/Rock_Snow_3.fbx",
-          scaleRange: {
-            min: 0.04,
-            max: 0.11
-          },
-          amount: 5
-        },
-        {
-          path: "models/CommonTree_Snow_1.fbx",
-          scaleRange: {
-            min: 0.02,
-            max: 0.06
-          },
-          amount: 10
-        },
-        {
-          path: "models/CommonTree_Snow_2.fbx",
-          scaleRange: {
-            min: 0.02,
-            max: 0.06
-          },
-          amount: 7
-        },
-        {
-          path: "models/CommonTree_Snow_3.fbx",
-          scaleRange: {
-            min: 0.02,
-            max: 0.06
-          },
-          amount: 7
-        },
-        {
-          path: "models/BirchTree_Snow_1.fbx",
-          scaleRange: {
-            min: 0.02,
-            max: 0.06
-          },
-          amount: 10
-        },
-        {
-          path: "models/BirchTree_Snow_2.fbx",
-          scaleRange: {
-            min: 0.02,
-            max: 0.06
-          },
-          amount: 3
-        }
-      ]
-    },
-    {
-      name: "vinyl",
-      xCoord: 50,
-      zCoord: 300,
-      size: 17,
-      landColour: "0xfcec91",
-      landHeightMap: "maps/height-map-1.jpeg",
-      hasOcean: true,
-      oceanColour: "0x91A2FC",
-      atmosphereColour: "0x36bdd9",
-      title: "VINYL   VINYL   VINYL   VINYL   VINYL   VINYL",
-      titleColour: "0xe1f2f2",
-      models: [
-        {
-          path: "models/Rock_1.fbx",
-          scaleRange: {
-            min: 0.02,
-            max: 0.07
-          },
-          amount: 5
-        },
-        {
-          path: "models/Rock_2.fbx",
-          scaleRange: {
-            min: 0.04,
-            max: 0.08
-          },
-          amount: 5
-        },
-        {
-          path: "models/Rock_3.fbx",
-          scaleRange: {
-            min: 0.04,
-            max: 0.08
-          },
-          amount: 5
-        },
-        {
-          path: "models/Bush_1.fbx",
-          scaleRange: {
-            min: 0.04,
-            max: 0.08
-          },
-          amount: 5
-        },
-        {
-          path: "models/Cactus_1.fbx",
-          scaleRange: {
-            min: 0.04,
-            max: 0.08
-          },
-          amount: 5
-        },
-        {
-          path: "models/Cactus_2.fbx",
-          scaleRange: {
-            min: 0.04,
-            max: 0.08
-          },
-          amount: 5
-        },
-        {
-          path: "models/Cactus_3.fbx",
-          scaleRange: {
-            min: 0.04,
-            max: 0.08
-          },
-          amount: 5
-        },
-        {
-          path: "models/PalmTree_1.fbx",
-          scaleRange: {
-            min: 0.02,
-            max: 0.04
-          },
-          amount: 10
-        },
-        {
-          path: "models/PalmTree_2.fbx",
-          scaleRange: {
-            min: 0.02,
-            max: 0.04
-          },
-          amount: 7
-        },
-        {
-          path: "models/PalmTree_3.fbx",
-          scaleRange: {
-            min: 0.02,
-            max: 0.04
-          },
-          amount: 7
-        },
-        {
-          path: "models/PalmTree_4.fbx",
-          scaleRange: {
-            min: 0.02,
-            max: 0.04
-          },
-          amount: 3
-        }
-      ]
-    },
-    {
-      name: "kitomba",
-      xCoord: -120,
-      zCoord: 400,
-      size: 23,
-      landColour: "0xB23911",
-      landHeightMap: "maps/height-map-2.jpeg",
-      hasOcean: true,
-      oceanColour: "0x118AB2",
-      atmosphereColour: "0x36bdd9",
-      title: "KITOMBA   KITOMBA   KITOMBA   KITOMBA   KITOMBA",
-      titleColour: "0xe1f2f2",
-      models: [
-        {
-          path: "models/Rock_1.fbx",
-          scaleRange: {
-            min: 0.01,
-            max: 0.09
-          },
-          amount: 50
-        }
-      ]
-    },
-    {
-      name: "contact",
-      xCoord: 140,
-      zCoord: 500,
-      size: 18,
-      landColour: "0x2A9D8F",
-      landHeightMap: "maps/height-map-1.jpeg",
-      hasOcean: true,
-      oceanColour: "0x9D2A38",
-      atmosphereColour: "0x36bdd9",
-      title: "CONTACT ME   CONTACT ME   CONTACT ME   ",
-      titleColour: "0xe1f2f2",
-      models: [
-        {
-          path: "models/Rock_1.fbx",
-          scaleRange: {
-            min: 0.01,
-            max: 0.09
-          },
-          amount: 50
-        }
-      ]
-    }
-  ]
-
+let planetsData = Planets.planets;
 
 let loading = true;
 let paused = false;
@@ -317,6 +24,7 @@ const fbxLoader = new FBXLoader()
 const clock = new THREE.Clock();
 
 const scene = new THREE.Scene();
+
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 camera.position.set(0, 15, -35)
 
@@ -368,6 +76,9 @@ playerLight.position.set( 0, 0, 0 );
 // scene.add( axesHelper );
 
 const playerGroup = new THREE.Group();
+
+
+
 playerGroup.add( player );
 playerGroup.add( playerLight );
 playerGroup.add( camera );
@@ -382,13 +93,26 @@ var starMaterial = new THREE.MeshToonMaterial( {
   fog: true
 });
 
+
+var fadeGeometry = new THREE.BoxGeometry( 2000, 500, 200 );
+var fadeMaterial = new THREE.MeshToonMaterial( {
+  color: 0x08060f,
+  fog: true,
+  transparent: true,
+  opacity: 0.8
+});
+
+var fade = new THREE.Mesh(fadeGeometry, fadeMaterial);
+fade.position.set(0,0,300)
+playerGroup.add(fade);
+
 // create stars
 const starGroup = new THREE.Group();
 for(let i = 0; i < 4; i++){
   const starSide = new THREE.Group();
   for(let i = 0; i < 250; i++){
-    let star = new THREE.Mesh( new THREE.SphereGeometry( generateRandomNumber(0.05, 1), 6, 6 ), starMaterial )
-    star.position.set(generateRandomNumber(-700, 700), generateRandomNumber(-700, 700), 500)
+    let star = new THREE.Mesh( new THREE.SphereGeometry( generateRandomNumber(0.01, 0.5), 6, 6 ), starMaterial )
+    star.position.set(generateRandomNumber(-300, 300), generateRandomNumber(-300, 300), 100)
     starSide.add(star)
   }
   starSide.rotation.y = i * 2;
@@ -498,6 +222,13 @@ function generateRandomNumber(min, max, decimalPlaces = 5) {
 
 window.addEventListener('resize', onWindowResize, false)
 
+function onWindowResize() {
+  camera.aspect = window.innerWidth / window.innerHeight
+  camera.updateProjectionMatrix()
+  renderer.setSize(window.innerWidth, window.innerHeight)
+  renderer.render(scene, camera)
+}
+
 let mouseXDif = 0;
 let mouseYDif = 0;
 
@@ -588,12 +319,6 @@ $(".close-button").click(function(e){
   paused = false;
 });
 
-function onWindowResize() {
-    camera.aspect = window.innerWidth / window.innerHeight
-    camera.updateProjectionMatrix()
-    renderer.setSize(window.innerWidth, window.innerHeight)
-    renderer.render(scene, camera)
-}
 
 const rotationSpeed = 0.0000002;
 const movementSpeed = 1;
