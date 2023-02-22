@@ -361,7 +361,7 @@ fbxLoader.load(
 
 camera.lookAt(player.position.x, player.position.y + 15, player.position.z)
 
-const playerLight = new THREE.PointLight( 0xff6b30, 3, 100);
+const playerLight = new THREE.PointLight( 0xff6b30, 2, 180);
 playerLight.position.set( 0, 0, 0 );
 
 
