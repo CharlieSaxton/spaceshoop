@@ -1,5 +1,16 @@
 // import * as THREE from "./node_modules/three"
 import { FBXLoader } from 'https://cdn.skypack.dev/three@0.132.2/examples/jsm/loaders/FBXLoader'
+import { FontLoader, TextGeometry } from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.js';
+import Bender from 'https://cdn.jsdelivr.net/gh/Sean-Bradley/Bender@main/dist/client/bender.js'
+
+import Worlds from './worlds.json' assert { type: "json" };
+
+
+let worlds = Worlds.Worlds;
+console.log(worlds);
+
+
+const bender = new Bender()
 
 const fbxLoader = new FBXLoader()
 
@@ -17,8 +28,9 @@ renderer.shadowMap.enabled = true;
 document.body.appendChild(renderer.domElement)
 
 let trail = [];
+let worldHeaders = []
 
-
+const loader = new FontLoader();
 
 
 var player = new THREE.Group();
@@ -62,11 +74,8 @@ playerGroup.add( camera );
 
 scene.add(playerGroup)
 
-
 const ambient = new THREE.AmbientLight(0xc7eaff, 0.5);
 scene.add(ambient);
-
-
 
 var starMaterial = new THREE.MeshToonMaterial( {
   color: 0xfff3db,
@@ -87,188 +96,64 @@ for(let i = 0; i < 4; i++){
 }
 playerGroup.add(starGroup);
 
-createWorld(60, 230, 0x376942, 20, [ {
-  path: 'models/BirchTree_1.fbx', 
-  scaleRange: {min: 0.01, max: 0.09}, 
-  amount: 3
-},
-{
-  path: 'models/Bush_2.fbx', 
-  scaleRange: {min: 0.01, max: 0.09}, 
-  amount: 8
-},
-{
-  path: 'models/Flowers.fbx', 
-  scaleRange: {min: 0.01, max: 0.09}, 
-  amount: 12
-},], false, true);
+worlds.forEach(world =>{
+  createWorld(world)
+})
 
-
-createWorld(30, 30, 0x6c37de, 10, [ {
-  path: 'models/BirchTree_1.fbx', 
-  scaleRange: {min: 0.01, max: 0.09}, 
-  amount: 3
-},
-{
-  path: 'models/Bush_2.fbx', 
-  scaleRange: {min: 0.01, max: 0.09}, 
-  amount: 8
-},
-{
-  path: 'models/Flowers.fbx', 
-  scaleRange: {min: 0.01, max: 0.09}, 
-  amount: 12
-},], false, true);
-
-
-createWorld(50, 120, 0xf2c511, 15, [ {
-  path: 'models/BirchTree_1.fbx', 
-  scaleRange: {min: 0.01, max: 0.09}, 
-  amount: 3
-},
-{
-  path: 'models/Bush_2.fbx', 
-  scaleRange: {min: 0.01, max: 0.09}, 
-  amount: 8
-},
-{
-  path: 'models/Flowers.fbx', 
-  scaleRange: {min: 0.01, max: 0.09}, 
-  amount: 12
-},], true, true);
-
-
-createWorld(-100, 50, 0xfc034e, 40, [ {
-  path: 'models/Wheat.fbx', 
-  scaleRange: {min: 0.01, max: 0.09}, 
-  amount: 30
-},
-{
-  path: 'models/Willow_1.fbx', 
-  scaleRange: {min: 0.01, max: 0.09}, 
-  amount: 8
-},
-{
-  path: 'models/Willow_2.fbx', 
-  scaleRange: {min: 0.01, max: 0.09}, 
-  amount: 12
-},
-{
-  path: 'models/Willow_3.fbx', 
-  scaleRange: {min: 0.01, max: 0.09}, 
-  amount: 6
-},
-{
-  path: 'models/CommonTree_Dead_1.fbx', 
-  scaleRange: {min: 0.01, max: 0.09}, 
-  amount: 2
-},
-{
-  path: 'models/CommonTree_Dead_2.fbx', 
-  scaleRange: {min: 0.01, max: 0.09}, 
-  amount: 3
-},
-{
-  path: 'models/CommonTree_Dead_5.fbx', 
-  scaleRange: {min: 0.01, max: 0.09}, 
-  amount: 2
-},
-{
-  path: 'models/CommonTree_1.fbx', 
-  scaleRange: {min: 0.01, max: 0.09}, 
-  amount: 12
-},
-{
-  path: 'models/CommonTree_2.fbx', 
-  scaleRange: {min: 0.01, max: 0.09}, 
-  amount: 12
-},], true, true);
-
-createWorld(-50, 200, 0xe1f2f2, 32, [{
-  path: 'models/CommonTree_Snow_1.fbx', 
-  scaleRange: {min: 0.01, max: 0.09}, 
-  amount: 3
-},
-{
-  path: 'models/CommonTree_Snow_2.fbx', 
-  scaleRange: {min: 0.01, max: 0.09}, 
-  amount: 10
-},
-{
-  path: 'models/CommonTree_Snow_3.fbx', 
-  scaleRange: {min: 0.01, max: 0.09}, 
-  amount: 10
-},
-{
-  path: 'models/Rock_Snow_1.fbx', 
-  scaleRange: {min: 0.01, max: 0.09}, 
-  amount: 10
-},
-{
-  path: 'models/Rock_Snow_2.fbx', 
-  scaleRange: {min: 0.01, max: 0.09}, 
-  amount: 15
-},
-{
-  path: 'models/Rock_Snow_3.fbx', 
-  scaleRange: {min: 0.01, max: 0.09}, 
-  amount: 4
-},
-{
-  path: 'models/Rock_Snow_3.fbx', 
-  scaleRange: {min: 0.01, max: 0.09}, 
-  amount: 4
-},
-{
-  path: 'models/WoodLog_Snow.fbx', 
-  scaleRange: {min: 0.01, max: 0.09}, 
-  amount: 10
-},], true, true);
-
-
-
-function createWorld(xCoord, zCoord, colour, size, models = [], hasRing = false, hasOcean = false){
+function createWorld(worldData){
   let globeGroup = new THREE.Group();
-  let num = generateRandomNumber(1, 3, 0)
-  let heightMap = new THREE.TextureLoader().load('maps/height-map-' + num + '.jpeg')
+  let heightMap = new THREE.TextureLoader().load(worldData.landHeightMap)
   var worldMaterial = new THREE.MeshToonMaterial( {
-    color: colour,
+    color: Number(worldData.landColour),
     fog: true,
     displacementMap: heightMap
   });
-
   worldMaterial.displacementScale = 10
-
-
-  if(hasRing){
-    const ringGeometry = new THREE.RingGeometry( size + 18, size + 18 + generateRandomNumber(5, 15), 32 );
-    const ringMaterial = new THREE.MeshToonMaterial( { 
-      color: 0xf7e0b7, 
-      side: THREE.DoubleSide, 
-      fog: true,
-      transparent: true,
-      opacity: generateRandomNumber(0.3, 0.9)
+  loader.load( 'fonts/Work_Sans_Bold.json', function ( font ) {
+    let textGroup = new THREE.Group();
+    const textGeometry = new TextGeometry( worldData.title, {
+      font: font,
+      size: 7,
+      height: 1,
+      curveSegments: 12,
+      bevelEnabled: true,
+      bevelThickness: 0,
+      bevelSize: 0,
+      bevelOffset: 0,
+      bevelSegments: 1
     } );
-    const ring = new THREE.Mesh( ringGeometry, ringMaterial );
-    ring.rotation.x = generateRandomNumber(-2, 2)
-    globeGroup.add( ring );
-  }
 
 
-  if(hasOcean){
+    const textMaterial = new THREE.MeshToonMaterial( { 
+      color: Number(worldData.titleColour), 
+      fog: true
+    } );
+    bender.bend(textGeometry, 'z', -1 / (worldData.size + 20) )
+
+    const text = new THREE.Mesh( textGeometry, textMaterial );
+    text.rotation.set(0, Math.PI, 0) 
+    text.position.y = worldData.size + 20
+    textGroup.add(text)
+    worldHeaders.push(textGroup)
+    globeGroup.add(textGroup)
+  } );
+
+
+
+  if(worldData.hasOcean){
     var oceanMaterial = new THREE.MeshToonMaterial( {
-      color: 0x0f3b75,
+      color: Number(worldData.oceanColour),
       fog: true
     });
-    let ocean = new THREE.Mesh( new THREE.SphereGeometry( size +  worldMaterial.displacementScale/2, 64, 24 ), oceanMaterial );
+    let ocean = new THREE.Mesh( new THREE.SphereGeometry( worldData.size +  worldMaterial.displacementScale/2, 64, 24 ), oceanMaterial );
     globeGroup.add(ocean)
   }
-  let globe = new THREE.Mesh( new THREE.SphereGeometry( size, 64, 24 ), worldMaterial );
+  let globe = new THREE.Mesh( new THREE.SphereGeometry( worldData.size, 64, 24 ), worldMaterial );
   globe.recieveShadow = true
   globeGroup.add(globe);
-  globeGroup.position.set(xCoord, 0, zCoord)
+  globeGroup.position.set(worldData.xCoord, 0, worldData.zCoord)
 
-  models.forEach(model => {
+  worldData.models.forEach(model => {
     for(let i = 0; i < model.amount; i++){
       fbxLoader.load(
           model.path,
@@ -280,7 +165,7 @@ function createWorld(xCoord, zCoord, colour, size, models = [], hasRing = false,
               var pivot = new THREE.Group();
               let scale = generateRandomNumber(model.scaleRange.min, model.scaleRange.max)
               object.scale.set(scale, scale, scale)
-              object.position.set(0, size + worldMaterial.displacementScale/2, 0)
+              object.position.set(0, worldData.size + worldMaterial.displacementScale/2, 0)
               pivot.add( object );
               pivot.rotation.set(generateRandomNumber(-2, 2), generateRandomNumber(-2, 2), generateRandomNumber(-2, 2))
               globeGroup.add( pivot );
@@ -417,6 +302,9 @@ var trailMaterialEnd = new THREE.MeshToonMaterial( {
 let trailScaleFallOff = 0.05;
 let trailSpeedFallOff = 0.2
 
+const headerRotationSpeed = 0.005
+const worldRotationSpeed = 0.001
+
 function animate() {
     trail.forEach(function(trailPiece, i) {
       if(trailPiece.scale.x <= 0){
@@ -430,6 +318,10 @@ function animate() {
       trailPiece.position.set(trailPiece.position.x + generateRandomNumber(-0.3, 0.3), trailPiece.position.y, trailPiece.position.z - trailSpeedFallOff);
       trailPiece.scale.set(trailPiece.scale.x - trailScaleFallOff, trailPiece.scale.y - trailScaleFallOff, trailPiece.scale.z - trailScaleFallOff)
     })
+
+    worldHeaders.forEach(header => {
+      header.rotation.z = header.rotation.z + headerRotationSpeed
+    });
 
     if(mouseDown){
       let deltaTime = clock.getDelta()

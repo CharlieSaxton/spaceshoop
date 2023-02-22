@@ -1,0 +1,22 @@
+{
+    "Worlds": [
+        {
+            "xCoord": 0,
+            "zCoord": 100,
+            "size": 31,
+            "landColour": "0xe1f2f2",
+            "landHeightMap": "maps/height-map-1.jpeg",
+            "hasOcean": true,
+            "oceanColour": "0x0f3b75",
+            "title": "DROPPAH  DROPPAH  DROPPAH  DROPPAH  DROPPAH  DROPPAH",
+            "titleColour": "0xe1f2f2",
+            "models":
+            [{
+                "path": "models/Rock_1.fbx", 
+                "scaleRange": {"min": 0.01, "max": 0.09}, 
+                "amount": 50
+            }]
+        }
+    ]
+   
+}

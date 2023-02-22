@@ -1,0 +1,97 @@
+
+// createWorld(60, 230, 0x376942, 20, [ {
+//   path: 'models/BirchTree_1.fbx', 
+//   scaleRange: {min: 0.01, max: 0.09}, 
+//   amount: 3
+// },
+// {
+//   path: 'models/Bush_2.fbx', 
+//   scaleRange: {min: 0.01, max: 0.09}, 
+//   amount: 8
+// },
+// {
+//   path: 'models/Flowers.fbx', 
+//   scaleRange: {min: 0.01, max: 0.09}, 
+//   amount: 12
+// },], false, true);
+
+
+// createWorld(30, 30, 0x6c37de, 10, [ {
+//   path: 'models/BirchTree_1.fbx', 
+//   scaleRange: {min: 0.01, max: 0.09}, 
+//   amount: 3
+// },
+// {
+//   path: 'models/Bush_2.fbx', 
+//   scaleRange: {min: 0.01, max: 0.09}, 
+//   amount: 8
+// },
+// {
+//   path: 'models/Flowers.fbx', 
+//   scaleRange: {min: 0.01, max: 0.09}, 
+//   amount: 12
+// },], false, true);
+
+
+// createWorld(50, 120, 0xf2c511, 15, [ {
+//   path: 'models/BirchTree_1.fbx', 
+//   scaleRange: {min: 0.01, max: 0.09}, 
+//   amount: 3
+// },
+// {
+//   path: 'models/Bush_2.fbx', 
+//   scaleRange: {min: 0.01, max: 0.09}, 
+//   amount: 8
+// },
+// {
+//   path: 'models/Flowers.fbx', 
+//   scaleRange: {min: 0.01, max: 0.09}, 
+//   amount: 12
+// },], true, true);
+
+
+// createWorld(-100, 50, 0xfc034e, 40, [ {
+//   path: 'models/Wheat.fbx', 
+//   scaleRange: {min: 0.01, max: 0.09}, 
+//   amount: 30
+// },
+// {
+//   path: 'models/Willow_1.fbx', 
+//   scaleRange: {min: 0.01, max: 0.09}, 
+//   amount: 8
+// },
+// {
+//   path: 'models/Willow_2.fbx', 
+//   scaleRange: {min: 0.01, max: 0.09}, 
+//   amount: 12
+// },
+// {
+//   path: 'models/Willow_3.fbx', 
+//   scaleRange: {min: 0.01, max: 0.09}, 
+//   amount: 6
+// },
+// {
+//   path: 'models/CommonTree_Dead_1.fbx', 
+//   scaleRange: {min: 0.01, max: 0.09}, 
+//   amount: 2
+// },
+// {
+//   path: 'models/CommonTree_Dead_2.fbx', 
+//   scaleRange: {min: 0.01, max: 0.09}, 
+//   amount: 3
+// },
+// {
+//   path: 'models/CommonTree_Dead_5.fbx', 
+//   scaleRange: {min: 0.01, max: 0.09}, 
+//   amount: 2
+// },
+// {
+//   path: 'models/CommonTree_1.fbx', 
+//   scaleRange: {min: 0.01, max: 0.09}, 
+//   amount: 12
+// },
+// {
+//   path: 'models/CommonTree_2.fbx', 
+//   scaleRange: {min: 0.01, max: 0.09}, 
+//   amount: 12
+// },], true, true);
