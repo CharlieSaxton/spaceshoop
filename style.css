@@ -26,3 +26,21 @@ body{
     margin-left: -75px;
     margin-top: -75px;
 }
+
+.planet-overlay{
+    display: none;
+    width: 100vw;
+    height: calc(100vh - 100px);
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    background-color: rgba(255, 255, 255, 0.815);
+}
+
+.close-button{
+    cursor: pointer;
+}
+
+#planet-overlay-droppah{
+
+}

@@ -1,6 +1,7 @@
 {
-    "Worlds": [
+    "planets": [
         {
+            "name": "droppah",
             "xCoord": 0,
             "zCoord": 100,
             "size": 31,
