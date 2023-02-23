@@ -509,12 +509,11 @@ function createplanet(planetData){
   planet.recieveShadow = true
   planetGroup.add(planet);
 
-  let planetBounds = new THREE.Mesh( new THREE.SphereGeometry( planetData.size + 5, 64, 24 ),  new THREE.MeshToonMaterial( {transparent: true, opacity: 0}) );
+  let planetBounds = new THREE.Mesh( new THREE.BoxGeometry( planetData.size + 18, planetData.size + 18, planetData.size + 18 ),  new THREE.MeshToonMaterial( {transparent: true, opacity: 0.0}) );
 
   planetBounds.position.set(planetData.xCoord, 0, planetData.zCoord)
   planetBounds.userData.planetName = planetData.name
   planetsBounds.push(planetBounds)
-
   scene.add(planetBounds);
 
 
@@ -700,13 +699,17 @@ window.addEventListener('touchmove', (e) => {
 
 $(".close-button").click(function(e){
   let target = $(e.target).closest(".planet-overlay");
+  paused = false;
+  console.log('here')
+  // $(target).removeClass('enter');
+  // $(target).addClass('exit');
+  // setTimeout(()=>{
+  //   $(target).hide();
 
-  $(target).removeClass('enter');
-  $(target).addClass('exit');
-  setTimeout(()=>{
-    $(target).hide();
-    paused = false;
-  }, 600)
+  // }, 600)
+
+  openClosePlanetOverlay($(target), false)
+    
  
   setTimeout(()=>{
     paused = false;
@@ -723,8 +726,8 @@ $(".close-button").click(function(e){
 });
 
 
-const rotationSpeed = 0.0000002;
-const movementSpeed = 1.5;
+const rotationSpeed = 0.0000004;
+const movementSpeed = 1.75;
 const joystickMoveRotateBounds = 30
 
 var trailMaterialStart = new THREE.MeshToonMaterial( {
@@ -811,9 +814,8 @@ function animate() {
           var inPlanetBounds = planetBB.containsBox(playerBB);
           if(inPlanetBounds){
           
-            $("#planet-overlay-" + planet.userData.planetName).show();
-            $("#planet-overlay-" + planet.userData.planetName).removeClass('exit');
-            $("#planet-overlay-" + planet.userData.planetName).addClass('enter');
+            openClosePlanetOverlay($("#planet-overlay-" + planet.userData.planetName), true)
+    
             setTimeout(()=>{
               $("#joystick").hide();
               cameraGroup.rotation.set(0,0,0);
@@ -832,4 +834,45 @@ function animate() {
    
 }
 animate();
+
+function openClosePlanetOverlay(target, open){
+
+  if(open){
+    planetOverlayAnimation(true);
+    setTimeout(()=>{
+      $(target).show();
+      $(target).removeClass('exit');
+      $(target).addClass('enter');
+    }, 400)
+  }else{
+    planetOverlayAnimation(false);
+    $(target).removeClass('enter');
+    $(target).addClass('exit');
+    setTimeout(()=>{
+      $(target).hide();
+    }, 400)
+  }
+}
+
+function planetOverlayAnimation(open){
+  for(let i = 1; i < 4; i++){
+    if(open){
+      setTimeout(()=>{
+        $("#planet-overlay-animation-" + i).show();
+        $("#planet-overlay-animation-" + i).removeClass('exit');
+        $("#planet-overlay-animation-" + i).addClass('enter');
+        setTimeout(()=>{
+          $("#planet-overlay-animation-" + i).hide();
+        }, 500)
+      }, i * 100)
+    }else{
+      setTimeout(()=>{
+        $("#planet-overlay-animation-" + i).show();
+        $("#planet-overlay-animation-" + i).removeClass('enter');
+        $("#planet-overlay-animation-" + i).addClass('exit');
+      }, 400 - (i * 100))
+    }
+
+  }
+}
 

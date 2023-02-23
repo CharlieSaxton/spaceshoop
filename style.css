@@ -60,13 +60,34 @@ body, html{
     text-align: center;
 }
 
+.planet-overlay-animation{
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+}
+
+#planet-overlay-animation-1{
+    background-color: #ef476f;
+}
+
+#planet-overlay-animation-2{
+    background-color: #ffd166;
+}
+#planet-overlay-animation-3{
+    background-color: #06d6a0;
+}
+
+
 .enter{
-    animation: enter 0.6s;
+    animation: enter 0.4s;
     top: 0vh;
 }
 
 .exit{
-    animation: exit 0.6s;
+    animation: exit 0.4s;
     top: 100vh;
 }
 
