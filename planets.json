@@ -176,30 +176,72 @@
             "zCoord": 400,
             "size": 23,
             "landColour": "0xB23911",
-            "landHeightMap": "maps/height-map-2.jpeg",
+            "landHeightMap": "maps/height-map-3.jpeg",
             "hasOcean": true,
             "oceanColour": "0x118AB2",
             "atmosphereColour": "0x36bdd9",
             "title": "KITOMBA   KITOMBA   KITOMBA   KITOMBA   KITOMBA",
             "titleColour": "0xe1f2f2",
             "models":
-            [{
-                "path": "models/Rock_1.fbx", 
-                "scaleRange": {"min": 0.01, "max": 0.09}, 
-                "amount": 50
-            }]
+            [
+            {
+                "path": "models/PineTree_Autumn_1.fbx", 
+                "scaleRange": {"min": 0.01, "max": 0.07}, 
+                "amount": 5
+            },
+            {
+                "path": "models/PineTree_Autumn_2.fbx", 
+                "scaleRange": {"min": 0.01, "max": 0.07}, 
+                "amount": 5
+            },
+            {
+                "path": "models/PineTree_Autumn_3.fbx", 
+                "scaleRange": {"min": 0.01, "max": 0.07}, 
+                "amount": 5
+            },
+            {
+                "path": "models/PineTree_Autumn_4.fbx", 
+                "scaleRange": {"min": 0.01, "max": 0.07}, 
+                "amount": 5
+            },
+            {
+                "path": "models/PineTree_Autumn_5.fbx", 
+                "scaleRange": {"min": 0.01, "max": 0.07}, 
+                "amount": 5
+            },
+            {
+                "path": "models/Rock_Moss_1.fbx", 
+                "scaleRange": {"min": 0.01, "max": 0.07}, 
+                "amount": 10
+            },
+            {
+                "path": "models/Rock_Moss_3.fbx", 
+                "scaleRange": {"min": 0.01, "max": 0.07}, 
+                "amount": 10
+            },
+            {
+                "path": "models/Rock_Moss_2.fbx", 
+                "scaleRange": {"min": 0.01, "max": 0.07}, 
+                "amount": 10
+            },
+            {
+                "path": "models/WoodLog.fbx", 
+                "scaleRange": {"min": 0.06, "max": 0.09}, 
+                "amount": 10
+            }
+           ]
         },
         {
             "name": "contact",
-            "xCoord": 140,
-            "zCoord": 500,
-            "size": 18,
+            "xCoord": 0,
+            "zCoord": 470,
+            "size": 17,
             "landColour": "0x2A9D8F",
             "landHeightMap": "maps/height-map-1.jpeg",
             "hasOcean": true,
             "oceanColour": "0x9D2A38",
             "atmosphereColour": "0x36bdd9",
-            "title": "CONTACT ME   CONTACT ME   CONTACT ME   ",
+            "title": "CONTACT ME     CONTACT ME     CONTACT ME     ",
             "titleColour": "0xe1f2f2",
             "models":
             [{

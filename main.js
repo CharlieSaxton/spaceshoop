@@ -260,7 +260,7 @@ let planetsData = [
     zCoord: 400,
     size: 23,
     landColour: "0xB23911",
-    landHeightMap: "maps/height-map-2.jpeg",
+    landHeightMap: "maps/height-map-3.jpeg",
     hasOcean: true,
     oceanColour: "0x118AB2",
     atmosphereColour: "0x36bdd9",
@@ -268,26 +268,90 @@ let planetsData = [
     titleColour: "0xe1f2f2",
     models: [
       {
-        path: "models/Rock_1.fbx",
+        path: "models/PineTree_Autumn_1.fbx",
         scaleRange: {
           min: 0.01,
+          max: 0.07
+        },
+        amount: 5
+      },
+      {
+        path: "models/PineTree_Autumn_2.fbx",
+        scaleRange: {
+          min: 0.01,
+          max: 0.07
+        },
+        amount: 5
+      },
+      {
+        path: "models/PineTree_Autumn_3.fbx",
+        scaleRange: {
+          min: 0.01,
+          max: 0.07
+        },
+        amount: 5
+      },
+      {
+        path: "models/PineTree_Autumn_4.fbx",
+        scaleRange: {
+          min: 0.01,
+          max: 0.07
+        },
+        amount: 5
+      },
+      {
+        path: "models/PineTree_Autumn_5.fbx",
+        scaleRange: {
+          min: 0.01,
+          max: 0.07
+        },
+        amount: 5
+      },
+      {
+        path: "models/Rock_Moss_1.fbx",
+        scaleRange: {
+          min: 0.01,
+          max: 0.07
+        },
+        amount: 10
+      },
+      {
+        path: "models/Rock_Moss_3.fbx",
+        scaleRange: {
+          min: 0.01,
+          max: 0.07
+        },
+        amount: 10
+      },
+      {
+        path: "models/Rock_Moss_2.fbx",
+        scaleRange: {
+          min: 0.01,
+          max: 0.07
+        },
+        amount: 10
+      },
+      {
+        path: "models/WoodLog.fbx",
+        scaleRange: {
+          min: 0.06,
           max: 0.09
         },
-        amount: 50
+        amount: 10
       }
     ]
   },
   {
     name: "contact",
-    xCoord: 140,
-    zCoord: 500,
-    size: 18,
+    xCoord: 0,
+    zCoord: 470,
+    size: 17,
     landColour: "0x2A9D8F",
     landHeightMap: "maps/height-map-1.jpeg",
     hasOcean: true,
     oceanColour: "0x9D2A38",
     atmosphereColour: "0x36bdd9",
-    title: "CONTACT ME   CONTACT ME   CONTACT ME   ",
+    title: "CONTACT ME     CONTACT ME     CONTACT ME     ",
     titleColour: "0xe1f2f2",
     models: [
       {
@@ -301,6 +365,8 @@ let planetsData = [
     ]
   }
 ]
+
+
 let loading = true;
 let paused = false;
 setTimeout(() =>{
@@ -308,6 +374,7 @@ setTimeout(() =>{
 }, 1000);
 
 
+let tutorialStage = 1;
 
 
 const bender = new Bender()
@@ -318,8 +385,11 @@ const clock = new THREE.Clock();
 
 const scene = new THREE.Scene();
 
+const cameraGroup = new THREE.Group();
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 camera.position.set(0, 15, -35)
+
+cameraGroup.add(camera)
 
 let renderer = new THREE.WebGLRenderer( { antialias: true } );
 renderer.setClearColor(0x08060f);
@@ -349,6 +419,7 @@ fbxLoader.load(
         }
       });
       object.scale.set(0.005, 0.005, 0.005)
+      object.position.set(0,0,2.5)
       player.add( object );
   },
   (xhr) => {
@@ -358,6 +429,10 @@ fbxLoader.load(
       console.log(error)
   }
 )
+
+const playerBounds = new THREE.Mesh( new THREE.BoxGeometry( 1, 1, 5 ), new THREE.MeshBasicMaterial( {transparent: true, opacity: 0} ))
+playerBounds.position.set(0,0,-0.5)
+player.add(playerBounds)
 
 camera.lookAt(player.position.x, player.position.y + 15, player.position.z)
 
@@ -371,10 +446,22 @@ playerLight.position.set( 0, 0, 0 );
 const playerGroup = new THREE.Group();
 
 
+var fadeGeometry = new THREE.BoxGeometry( 2000, 500, 200 );
+var fadeMaterial = new THREE.MeshToonMaterial( {
+  color: 0x08060f,
+  fog: true,
+  transparent: true,
+  opacity: 0.8
+});
+
+var fade = new THREE.Mesh(fadeGeometry, fadeMaterial);
+fade.position.set(0,0,300)
+cameraGroup.add(fade);
+
 
 playerGroup.add( player );
 playerGroup.add( playerLight );
-playerGroup.add( camera );
+playerGroup.add( cameraGroup );
 
 scene.add(playerGroup)
 
@@ -387,17 +474,6 @@ var starMaterial = new THREE.MeshToonMaterial( {
 });
 
 
-var fadeGeometry = new THREE.BoxGeometry( 2000, 500, 200 );
-var fadeMaterial = new THREE.MeshToonMaterial( {
-  color: 0x08060f,
-  fog: true,
-  transparent: true,
-  opacity: 0.8
-});
-
-var fade = new THREE.Mesh(fadeGeometry, fadeMaterial);
-fade.position.set(0,0,300)
-playerGroup.add(fade);
 
 // create stars
 const starGroup = new THREE.Group();
@@ -431,8 +507,16 @@ function createplanet(planetData){
   planet.recieveShadow = true
   planetGroup.add(planet);
 
-  let planetBounds = new THREE.Mesh( new THREE.SphereGeometry( planetData.size + 15, 64, 24 ),  new THREE.MeshToonMaterial( {color: Number(planetData.atmosphereColour), transparent: true, opacity: 0.2}) );
-  planetGroup.add(planetBounds);
+  let planetBounds = new THREE.Mesh( new THREE.SphereGeometry( planetData.size, 64, 24 ),  new THREE.MeshToonMaterial( {transparent: true, opacity: 0}) );
+  planetBounds.position.set(planetData.xCoord, 0, planetData.zCoord)
+  planetBounds.userData.planetName = planetData.name
+  planets.push(planetBounds)
+
+  scene.add(planetBounds);
+
+  let planetAtmosphere = new THREE.Mesh( new THREE.SphereGeometry( planetData.size + 15, 64, 24 ),  new THREE.MeshToonMaterial( {color: Number(planetData.atmosphereColour), transparent: true, opacity: 0.2}) );
+
+  planetGroup.add(planetAtmosphere);
 
 
   loader.load( 'fonts/Work_Sans_Bold.json', function ( font ) {
@@ -502,8 +586,8 @@ function createplanet(planetData){
     
     
   });
-  planets.push(planetGroup)
-  planetGroup.userData.planetName = planetData.name
+  // planets.push(planetGroup)
+  // planetGroup.userData.planetName = planetData.name
   scene.add(planetGroup)
 }
 
@@ -559,6 +643,10 @@ window.addEventListener("touchstart", (e) => {
 });
 
 function up(){
+  if(tutorialStage = 1){
+    tutorialStage = 2;
+    $("#tutorial").text('Great! Now try fly into one of the planets')
+  }
   $("#joystick").hide();
   mouseDown = false;
   mouseXDif = 0;
@@ -568,6 +656,7 @@ window.addEventListener("touchend", up);
 window.addEventListener("mouseup", up);
 
 function move(mouseX, mouseY){
+
   if(!paused){
     const maxMoveDist = 50;
     mouseXDif = mouseX - downMousePosX;
@@ -610,11 +699,19 @@ $(".close-button").click(function(e){
   let target = e.target;
   $(target).closest(".planet-overlay").hide();
   paused = false;
+
+  if(tutorialStage = 2){
+    tutorialStage = 3;
+    $("#tutorial").text('Well done! Thats all you need to know. Have fun!')
+    setTimeout(()=>{
+      $("#tutorial").hide();
+    }, 5000)
+  }
 });
 
 
 const rotationSpeed = 0.0000002;
-const movementSpeed = 1;
+const movementSpeed = 1.5;
 const joystickMoveRotateBounds = 30
 
 var trailMaterialStart = new THREE.MeshToonMaterial( {
@@ -637,6 +734,7 @@ let trailSpeedFallOff = 0.2
 
 const headerRotationSpeed = 0.005
 const planetRotationSpeed = 0.001
+
 
 function animate() {
     if(!paused){
@@ -664,14 +762,24 @@ function animate() {
   
         if(mouseXDif > joystickMoveRotateBounds){
           playerGroup.rotation.set(playerGroup.rotation.x, playerGroup.rotation.y - rotationSpeed * Math.pow(mouseXDif, 4) * deltaTime, playerGroup.rotation.z)
+
+          if(cameraGroup.rotation.y < Math.PI/5){
+            cameraGroup.rotation.set(cameraGroup.rotation.x, cameraGroup.rotation.y + rotationSpeed * Math.pow(mouseXDif, 4) * deltaTime, cameraGroup.rotation.z)
+          }
+
         }else if(mouseXDif < -joystickMoveRotateBounds){
           playerGroup.rotation.set(playerGroup.rotation.x, playerGroup.rotation.y + rotationSpeed * Math.pow(mouseXDif, 4) * deltaTime, playerGroup.rotation.z)
+
+          if(cameraGroup.rotation.y > -Math.PI/5){
+            cameraGroup.rotation.set(cameraGroup.rotation.x, cameraGroup.rotation.y - rotationSpeed * Math.pow(mouseXDif, 4) * deltaTime, cameraGroup.rotation.z)
+
+          }
+
         }
         starGroup.rotation.set(starGroup.rotation.x, -playerGroup.rotation.y, starGroup.rotation.z)
-  
         if(mouseYDif > joystickMoveRotateBounds || mouseYDif < -joystickMoveRotateBounds){
           let trailPiece = new THREE.Mesh( new THREE.SphereGeometry(generateRandomNumber(0.3, 0.7), 12, 12 ), trailMaterialStart );
-          trailPiece.position.set(0, 0, -5);
+          trailPiece.position.set(0, 0, -3.5);
           trail.push(trailPiece)
           playerGroup.add(trailPiece)
   
@@ -684,18 +792,18 @@ function animate() {
   
       planets.forEach(planet => {
         planet.rotation.y = planet.rotation.y + planetRotationSpeed
-        // if(!loading){
-        //   var playerBB = new THREE.Box3().setFromObject(player)
-        //   var planetBB = new THREE.Box3().setFromObject(planet);
-        //   var inPlanetBounds = planetBB.containsBox(playerBB);
-        //   if(inPlanetBounds){
-        //     playerGroup.rotation.set(playerGroup.rotation.x, 0, playerGroup.rotation.z)
-        //     playerGroup.position.set(planet.position.x, playerGroup.position.y, planet.position.z - 100)
-        //     $("#planet-overlay-" + planet.userData.planetName).show();
-        //     $("#joystick").hide();
-        //     paused = true;
-        //   }
-        // }
+        if(!loading){
+          var playerBB = new THREE.Box3().setFromObject(playerBounds)
+          var planetBB = new THREE.Box3().setFromObject(planet);
+          var inPlanetBounds = planetBB.containsBox(playerBB);
+          if(inPlanetBounds){
+            playerGroup.rotation.set(playerGroup.rotation.x, 0, playerGroup.rotation.z)
+            playerGroup.position.set(planet.position.x, playerGroup.position.y, planet.position.z - 100)
+            $("#planet-overlay-" + planet.userData.planetName).show();
+            $("#joystick").hide();
+            paused = true;
+          }
+        }
        
       });
     }
