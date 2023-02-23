@@ -60,7 +60,33 @@ body, html{
     text-align: center;
 }
 
+.enter{
+    animation: enter 0.6s;
+    top: 0vh;
+}
 
+.exit{
+    animation: exit 0.6s;
+    top: 100vh;
+}
+
+@keyframes enter {
+    from {
+        top: 100vh;
+    }
+    to {
+        top: 0vh;
+    }
+}
+
+@keyframes exit {
+    from {
+        top: 0vh;
+    }
+    to {
+        top: 100vh;
+    }
+}
 
 .close-button{
     cursor: pointer;

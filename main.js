@@ -400,6 +400,8 @@ document.body.appendChild(renderer.domElement)
 
 let trail = [];
 let planets = [];
+let planetsBounds = [];
+
 let planetHeaders = []
 
 const loader = new FontLoader();
@@ -507,12 +509,14 @@ function createplanet(planetData){
   planet.recieveShadow = true
   planetGroup.add(planet);
 
-  let planetBounds = new THREE.Mesh( new THREE.SphereGeometry( planetData.size, 64, 24 ),  new THREE.MeshToonMaterial( {transparent: true, opacity: 0}) );
+  let planetBounds = new THREE.Mesh( new THREE.SphereGeometry( planetData.size + 5, 64, 24 ),  new THREE.MeshToonMaterial( {transparent: true, opacity: 0}) );
+
   planetBounds.position.set(planetData.xCoord, 0, planetData.zCoord)
   planetBounds.userData.planetName = planetData.name
-  planets.push(planetBounds)
+  planetsBounds.push(planetBounds)
 
   scene.add(planetBounds);
+
 
   let planetAtmosphere = new THREE.Mesh( new THREE.SphereGeometry( planetData.size + 15, 64, 24 ),  new THREE.MeshToonMaterial( {color: Number(planetData.atmosphereColour), transparent: true, opacity: 0.2}) );
 
@@ -586,8 +590,7 @@ function createplanet(planetData){
     
     
   });
-  // planets.push(planetGroup)
-  // planetGroup.userData.planetName = planetData.name
+  planets.push(planetGroup)
   scene.add(planetGroup)
 }
 
@@ -645,7 +648,7 @@ window.addEventListener("touchstart", (e) => {
 function up(){
   if(tutorialStage = 1){
     tutorialStage = 2;
-    $("#tutorial").text('Great! Now try fly into one of the planets')
+    $("#tutorial").text('Great! Now try flying into one of the planets')
   }
   $("#joystick").hide();
   mouseDown = false;
@@ -696,9 +699,19 @@ window.addEventListener('touchmove', (e) => {
 });
 
 $(".close-button").click(function(e){
-  let target = e.target;
-  $(target).closest(".planet-overlay").hide();
-  paused = false;
+  let target = $(e.target).closest(".planet-overlay");
+
+  $(target).removeClass('enter');
+  $(target).addClass('exit');
+  setTimeout(()=>{
+    $(target).hide();
+    paused = false;
+  }, 600)
+ 
+  setTimeout(()=>{
+    paused = false;
+  }, 1200)
+ 
 
   if(tutorialStage = 2){
     tutorialStage = 3;
@@ -790,18 +803,25 @@ function animate() {
         }
       }
   
-      planets.forEach(planet => {
+      planetsBounds.forEach(planet => {
         planet.rotation.y = planet.rotation.y + planetRotationSpeed
         if(!loading){
           var playerBB = new THREE.Box3().setFromObject(playerBounds)
           var planetBB = new THREE.Box3().setFromObject(planet);
           var inPlanetBounds = planetBB.containsBox(playerBB);
           if(inPlanetBounds){
-            playerGroup.rotation.set(playerGroup.rotation.x, 0, playerGroup.rotation.z)
-            playerGroup.position.set(planet.position.x, playerGroup.position.y, planet.position.z - 100)
+          
             $("#planet-overlay-" + planet.userData.planetName).show();
-            $("#joystick").hide();
-            paused = true;
+            $("#planet-overlay-" + planet.userData.planetName).removeClass('exit');
+            $("#planet-overlay-" + planet.userData.planetName).addClass('enter');
+            setTimeout(()=>{
+              $("#joystick").hide();
+              cameraGroup.rotation.set(0,0,0);
+              playerGroup.rotation.set(playerGroup.rotation.x, 0, playerGroup.rotation.z)
+              playerGroup.position.set(planet.position.x, playerGroup.position.y, planet.position.z - 100)
+              paused = true;
+            }, 600)
+       
           }
         }
        
