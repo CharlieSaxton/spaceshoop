@@ -7,7 +7,7 @@
     <meta name="theme-color" content="#08060f"/>
     <title>Charlie Saxton</title>
     <link rel="stylesheet" href="style.css">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.js"></script>
@@ -25,29 +25,234 @@
     <div class="planet-overlay-animation exit" id="planet-overlay-animation-3"></div>
 
 
-    <div id="planet-overlay-about" class="planet-overlay">
-        <h1>About Me</h1>
-        <p class="close-button">close</p>
+    <div id="planet-overlay-about" class="planet-overlay exit">
+        <div class="scroll-container">
+            <div class="inner-container">
+                <div class="flex-center">
+                    <div class="top-dial">
+                        <div class="back-container close-button">
+                            <p>BACK</p>
+                        </div>
+                        <div class="dial-circle" style="background-color: #ef476f"></div>
+                        <div class="dial-circle dial-circle-mid" id="mid-1"></div>
+                        <div class="dial-circle dial-circle-top"></div>
+                        <div class="dial-circle dial-circle-mid" id="mid-2"></div>
+                        <div class="dial-circle" ></div>
+                    </div>
+                </div>
+    
+                <div class="flex-center">
+                    <div class="header-circle" style="background-color: #ef476f"></div>
+                    <svg viewBox="0 0 100 100" width="100" height="100">
+                        <defs>
+                        <path id="circle"
+                            d="
+                            M 50, 50
+                            m -37, 0
+                            a 37,37 0 1,1 74,0
+                            a 37,37 0 1,1 -74,0"/>
+                        </defs>
+                        <text font-size="12.5">
+                        <textPath xlink:href="#circle">
+                            ABOUT ME&nbsp;&nbsp;&nbsp;ABOUT ME&nbsp;&nbsp;&nbsp;ABOUT ME&nbsp;&nbsp;&nbsp;
+                        </textPath>
+                        </text>
+                    </svg>
+                </div>
+    
+                <div class="content-section">
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Error perspiciatis rem cumque assumenda ad nostrum fuga quam quas. Repudiandae, in necessitatibus facilis suscipit harum autem modi mollitia incidunt ab, laborum et vero distinctio, animi tempore atque. Repellendus ratione porro in animi officia facilis voluptatem voluptas.</p>
+                </div>
+                <a href="#">
+                    <div class="content-section">
+                        <!-- <i class="fa fa-linkedin social"></i> -->
+                    </div>
+                </a>
+            </div>
+        </div>
     </div>
 
     <div id="planet-overlay-droppah" class="planet-overlay exit">
-        <h1>Droppah</h1>
-        <p class="close-button">close</p>
+        <div class="scroll-container">
+            <div class="inner-container">
+                <div class="flex-center">
+                    <div class="top-dial">
+                        <div class="back-container close-button">
+                            <p>BACK</p>
+                        </div>
+                        <div class="dial-circle"></div>
+                        <div class="dial-circle dial-circle-mid" id="mid-1" style="background-color: #ffd166"></div>
+                        <div class="dial-circle dial-circle-top"></div>
+                        <div class="dial-circle dial-circle-mid" id="mid-2"></div>
+                        <div class="dial-circle" ></div>
+                    </div>
+                </div>
+    
+                <div class="flex-center">
+                    <div class="header-circle" style="background-color: #ffd166"></div>
+                    <svg viewBox="0 0 100 100" width="100" height="100">
+                        <defs>
+                        <path id="circle"
+                            d="
+                            M 50, 50
+                            m -37, 0
+                            a 37,37 0 1,1 74,0
+                            a 37,37 0 1,1 -74,0"/>
+                        </defs>
+                        <text font-size="12.5">
+                        <textPath xlink:href="#circle">
+                            DROPPAH&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DROPPAH&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DROPPAH&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </textPath>
+                        </text>
+                    </svg>
+                </div>
+    
+                <div class="content-section">
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Error perspiciatis rem cumque assumenda ad nostrum fuga quam quas. Repudiandae, in necessitatibus facilis suscipit harum autem modi mollitia incidunt ab, laborum et vero distinctio, animi tempore atque. Repellendus ratione porro in animi officia facilis voluptatem voluptas.</p>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div id="planet-overlay-vinyl" class="planet-overlay exit">
-        <h1>Vinyl</h1>
-        <p class="close-button">close</p>
+        <div class="scroll-container">
+            <div class="inner-container">
+                <div class="flex-center">
+                    <div class="top-dial">
+                        <div class="back-container close-button">
+                            <p>BACK</p>
+                        </div>
+                        <div class="dial-circle"></div>
+                        <div class="dial-circle dial-circle-mid" id="mid-1"></div>
+                        <div class="dial-circle dial-circle-top" style="background-color: #06d6a0"></div>
+                        <div class="dial-circle dial-circle-mid" id="mid-2"></div>
+                        <div class="dial-circle" ></div>
+                    </div>
+                </div>
+
+                <div class="flex-center">
+                    <div class="header-circle" style="background-color: #06d6a0"></div>
+                    <svg viewBox="0 0 100 100" width="100" height="100">
+                        <defs>
+                        <path id="circle"
+                            d="
+                            M 50, 50
+                            m -37, 0
+                            a 37,37 0 1,1 74,0
+                            a 37,37 0 1,1 -74,0"/>
+                        </defs>
+                        <text font-size="12">
+                        <textPath xlink:href="#circle">
+                            VINYL&nbsp;&nbsp;&nbsp;VINYL&nbsp;&nbsp;&nbsp;VINYL&nbsp;&nbsp;&nbsp;VINYL&nbsp;&nbsp;&nbsp;VINYL&nbsp;&nbsp;&nbsp;
+                        </text>
+                    </svg>
+                </div>
+
+                <div class="content-section">
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Error perspiciatis rem cumque assumenda ad nostrum fuga quam quas. Repudiandae, in necessitatibus facilis suscipit harum autem modi mollitia incidunt ab, laborum et vero distinctio, animi tempore atque. Repellendus ratione porro in animi officia facilis voluptatem voluptas.</p>
+                </div>
+                <a href="#">
+                    <div class="content-section">
+                        <!-- <i class="fa fa-linkedin social"></i> -->
+                    </div>
+                </a>
+            </div>
+        </div>
     </div>
 
     <div id="planet-overlay-kitomba" class="planet-overlay exit">
-        <h1>Kitomba</h1>
-        <p class="close-button">close</p>
+        <div class="scroll-container">
+            <div class="inner-container">
+                <div class="flex-center">
+                    <div class="top-dial">
+                        <div class="back-container close-button">
+                            <p>BACK</p>
+                        </div>
+                        <div class="dial-circle"></div>
+                        <div class="dial-circle dial-circle-mid" id="mid-1"></div>
+                        <div class="dial-circle dial-circle-top"></div>
+                        <div class="dial-circle dial-circle-mid" id="mid-2" style="background-color: #47a1ef"></div>
+                        <div class="dial-circle" ></div>
+                    </div>
+                </div>
+    
+                <div class="flex-center">
+                    <div class="header-circle" style="background-color: #47a1ef"></div>
+                    <svg viewBox="0 0 100 100" width="100" height="100">
+                        <defs>
+                        <path id="circle"
+                            d="
+                            M 50, 50
+                            m -37, 0
+                            a 37,37 0 1,1 74,0
+                            a 37,37 0 1,1 -74,0"/>
+                        </defs>
+                        <text font-size="12">
+                        <textPath xlink:href="#circle">
+                            KITOMBA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KITOMBA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KITOMBA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </textPath>
+                        </text>
+                    </svg>
+                </div>
+    
+                <div class="content-section">
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Error perspiciatis rem cumque assumenda ad nostrum fuga quam quas. Repudiandae, in necessitatibus facilis suscipit harum autem modi mollitia incidunt ab, laborum et vero distinctio, animi tempore atque. Repellendus ratione porro in animi officia facilis voluptatem voluptas.</p>
+                </div>
+                <a href="#">
+                    <div class="content-section">
+                        <!-- <i class="fa fa-linkedin social"></i> -->
+                    </div>
+                </a>
+            </div>
+        </div>
+        
     </div>
 
     <div id="planet-overlay-contact" class="planet-overlay exit">
-        <h1>Contact Me</h1>
-        <p class="close-button">close</p>
+        <div class="scroll-container">
+            <div class="inner-container">
+                <div class="flex-center">
+                    <div class="top-dial">
+                        <div class="back-container close-button">
+                            <p>BACK</p>
+                        </div>
+                        <div class="dial-circle"></div>
+                        <div class="dial-circle dial-circle-mid" id="mid-1"></div>
+                        <div class="dial-circle dial-circle-top"></div>
+                        <div class="dial-circle dial-circle-mid" id="mid-2"></div>
+                        <div class="dial-circle" style="background-color: #ffd500"></div>
+                    </div>
+                </div>
+    
+                <div class="flex-center">
+                    <div class="header-circle" style="background-color: #ffd500"></div>
+                    <svg viewBox="0 0 100 100" width="100" height="100">
+                        <defs>
+                        <path id="circle"
+                            d="
+                            M 50, 50
+                            m -37, 0
+                            a 37,37 0 1,1 74,0
+                            a 37,37 0 1,1 -74,0"/>
+                        </defs>
+                        <text font-size="10.5">
+                        <textPath xlink:href="#circle">
+                            CONTACT ME&nbsp;&nbsp;&nbsp;CONTACT ME&nbsp;&nbsp;&nbsp;CONTACT ME&nbsp;&nbsp;&nbsp;
+                        </textPath>
+                        </text>
+                    </svg>
+                </div>
+    
+                <div class="content-section">
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Error perspiciatis rem cumque assumenda ad nostrum fuga quam quas. Repudiandae, in necessitatibus facilis suscipit harum autem modi mollitia incidunt ab, laborum et vero distinctio, animi tempore atque. Repellendus ratione porro in animi officia facilis voluptatem voluptas.</p>
+                </div>
+                <a href="#">
+                    <div class="content-section">
+                        <!-- <i class="fa fa-linkedin social"></i> -->
+                    </div>
+                </a>
+            </div>
+        </div>
     </div>
 </body>
 </html>

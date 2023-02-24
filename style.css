@@ -1,114 +1,245 @@
-@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-body{
-    margin: 0px;
-    width: 100vw; max-width: 100vw;
-    height: 100vh; max-height: 100vh;
-    overflow: hidden;
-    user-select: none; /* supported by Chrome and Opera */
-    -webkit-user-select: none; /* Safari */
-    -khtml-user-select: none; /* Konqueror HTML */
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* Internet Explorer/Edge */
-    font-family: 'Work Sans', sans-serif;
-    color: white;
-}
-body, html{
-    background-color: #08060f;
-}
-#tutorial{
-    position: fixed;
-    bottom: 40px;
-    width: calc(100vw - 40px);
-    left: 20px;
-    text-align: center;
-    font-weight: 300;
-    font-size: 20px;
-}
-#moving-touch-dot{
-    /* background-color: #000000cd; */
-    border: 3px solid rgb(255, 255, 255);
-    opacity: 0.5;
-    position: fixed;
-    width: 50px;
-    height: 50px;
-    left: 10px;
-    top: 10px;
-    border-radius: 100px;
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+body {
+  margin: 0px;
+  width: 100vw;
+  max-width: 100vw;
+  height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
+  user-select: none; /* supported by Chrome and Opera */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  font-family: "Work Sans", sans-serif;
+  color: white;
 }
 
-#joystick{
-    position: fixed;
-    display: none;
-    width: 150px;
-    height: 150px;
-    /* background-color: rgba(255, 255, 255, 0); */
-    border: 3px solid rgba(255, 255, 255, 0.375);
-    border-radius: 25px;
-    margin-left: -75px;
-    margin-top: -75px;
+body, html {
+  background-color: #08060f;
 }
 
-.planet-overlay{
-    display: none;
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    left: 0px;
-    top: 0px;
-    background-color: rgb(0, 0, 0);
-    color: white;
-    text-align: center;
+#tutorial {
+  position: fixed;
+  bottom: 40px;
+  width: calc(100vw - 40px);
+  left: 20px;
+  text-align: center;
+  font-weight: 300;
+  font-size: 20px;
 }
 
-.planet-overlay-animation{
-    display: none;
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    left: 0px;
-    top: 0px;
+#moving-touch-dot {
+  /* background-color: #000000cd; */
+  border: 3px solid rgb(255, 255, 255);
+  opacity: 0.5;
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  left: 10px;
+  top: 10px;
+  border-radius: 100px;
 }
 
-#planet-overlay-animation-1{
-    background-color: #ef476f;
+#joystick {
+  position: fixed;
+  display: none;
+  width: 150px;
+  height: 150px;
+  /* background-color: rgba(255, 255, 255, 0); */
+  border: 3px solid rgba(255, 255, 255, 0.375);
+  border-radius: 25px;
+  margin-left: -75px;
+  margin-top: -75px;
 }
 
-#planet-overlay-animation-2{
-    background-color: #ffd166;
-}
-#planet-overlay-animation-3{
-    background-color: #06d6a0;
-}
-
-
-.enter{
-    animation: enter 0.4s;
-    top: 0vh;
+.planet-overlay {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  background-color: #08060f;
+  display: none;
+  overflow: hidden;
 }
 
-.exit{
-    animation: exit 0.4s;
-    top: 100vh;
+.scroll-container {
+  color: white;
+  display: flex;
+  justify-content: center;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: 100vh;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.inner-container {
+  width: calc(100% - 40px);
+  max-width: 500px;
+  padding-bottom: 150px;
+  height: 100%;
+}
+
+.top-dial {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  width: 300px;
+  height: 300px;
+  border-radius: 150px;
+  border: 2px solid white;
+  margin-top: -150px;
+  display: flex;
+  margin-bottom: 100px;
+}
+
+.dial-circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 100px;
+  border: 2px solid white;
+  background-color: #08060f;
+  margin: 0px -15px;
+}
+.dial-circle.dial-circle-mid {
+  margin-top: 200px;
+}
+.dial-circle.dial-circle-mid#mid-1 {
+  margin-left: -15px;
+  margin-right: 70px;
+}
+.dial-circle.dial-circle-mid#mid-2 {
+  margin-left: 70px;
+}
+.dial-circle.dial-circle-top {
+  margin-top: 300px;
+}
+
+.back-container {
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border: 2px solid white;
+  border-bottom-right-radius: 30px;
+  transform: rotate(45deg);
+  margin-top: -2px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+.back-container p {
+  transform: rotate(-45deg);
+  margin-top: 60px;
+  margin-left: 52px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+.back-container:hover {
+  width: 150px;
+  height: 150px;
+}
+.back-container:hover p {
+  margin-top: 75px;
+  margin-left: 70px;
+}
+
+.social {
+  color: white;
+}
+
+.header-circle {
+  width: 150px;
+  height: 150px;
+  border-radius: 300px;
+  position: absolute;
+}
+
+svg {
+  margin-top: -40px;
+  fill: white;
+  height: auto;
+  max-width: 66vmin;
+  transform-origin: center;
+  width: 230px;
+  font-weight: 600;
+  animation: rotate 15s linear infinite;
+  margin-bottom: 50px;
+}
+
+.content-section {
+  margin-top: 15px;
+  min-height: 45px;
+  background-color: #212121;
+  border-radius: 15px;
+  padding: 7px 20px;
+}
+.content-section p {
+  font-weight: normal;
+  font-size: 14px;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.planet-overlay-animation {
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+}
+
+#planet-overlay-animation-1 {
+  background-color: #ef476f;
+}
+
+#planet-overlay-animation-2 {
+  background-color: #ffd166;
+}
+
+#planet-overlay-animation-3 {
+  background-color: #06d6a0;
+}
+
+.enter {
+  animation: enter 0.4s;
+  top: 0vh;
+}
+
+.exit {
+  animation: exit 0.4s;
+  top: 100vh;
 }
 
 @keyframes enter {
-    from {
-        top: 100vh;
-    }
-    to {
-        top: 0vh;
-    }
+  from {
+    top: 100vh;
+  }
+  to {
+    top: 0vh;
+  }
 }
-
 @keyframes exit {
-    from {
-        top: 0vh;
-    }
-    to {
-        top: 100vh;
-    }
-}
-
-.close-button{
-    cursor: pointer;
-}
+  from {
+    top: 0vh;
+  }
+  to {
+    top: 100vh;
+  }
+}/*# sourceMappingURL=style.css.map */
