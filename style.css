@@ -19,6 +19,56 @@ body, html {
   background-color: #08060f;
 }
 
+.loading-screen {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  background-color: #08060f;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.loading-screen span {
+  text-align: center;
+}
+.loading-screen p {
+  margin-bottom: -15px;
+}
+.loading-screen h2 {
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+.loading-screen .loading-progress {
+  height: 5px;
+  width: 280px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #ef476f 0%, #ffd166 25%, #06d6a0 50%, #ffd166 75%, #ef476f 100%);
+  background-size: 200%;
+  animation: moveGradient 5s linear infinite;
+}
+@keyframes moveGradient {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: -200% 0%;
+  }
+}
+
+.fade {
+  animation: fade 0.5s;
+}
+
+@keyframes fade {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
 #tutorial {
   position: fixed;
   bottom: 40px;
@@ -30,12 +80,10 @@ body, html {
 }
 
 #moving-touch-dot {
-  /* background-color: #000000cd; */
-  border: 3px solid rgb(255, 255, 255);
-  opacity: 0.5;
+  border: 2px solid rgb(255, 255, 255);
   position: fixed;
-  width: 50px;
-  height: 50px;
+  width: 45px;
+  height: 45px;
   left: 10px;
   top: 10px;
   border-radius: 100px;
@@ -46,8 +94,6 @@ body, html {
   display: none;
   width: 150px;
   height: 150px;
-  /* background-color: rgba(255, 255, 255, 0); */
-  border: 3px solid rgba(255, 255, 255, 0.375);
   border-radius: 25px;
   margin-left: -75px;
   margin-top: -75px;
@@ -84,9 +130,18 @@ body, html {
   max-width: 500px;
   padding-bottom: 150px;
   height: 100%;
+  margin-top: 300px;
+}
+
+.top-dial-container {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
 }
 
 .top-dial {
+  transition: 0.5s;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -100,26 +155,51 @@ body, html {
   margin-bottom: 100px;
 }
 
+#hover-text {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 70px;
+  font-weight: 600;
+}
+
 .dial-circle {
+  cursor: pointer;
   width: 30px;
   height: 30px;
   border-radius: 100px;
   border: 2px solid white;
   background-color: #08060f;
-  margin: 0px -15px;
+  margin: 0px -17px;
+  transition: 0.5s;
 }
 .dial-circle.dial-circle-mid {
-  margin-top: 200px;
+  margin-top: 200px !important;
 }
-.dial-circle.dial-circle-mid#mid-1 {
-  margin-left: -15px;
-  margin-right: 70px;
+.dial-circle.dial-circle-mid#dial-circle-droppah {
+  margin-left: -13px !important;
+  margin-right: 58px !important;
 }
-.dial-circle.dial-circle-mid#mid-2 {
-  margin-left: 70px;
+.dial-circle.dial-circle-mid#dial-circle-kitomba {
+  margin-left: 60px !important;
 }
 .dial-circle.dial-circle-top {
-  margin-top: 300px;
+  margin-top: 300px !important;
+}
+.dial-circle:hover#dial-circle-about {
+  background-color: #ef476f;
+}
+.dial-circle:hover#dial-circle-droppah {
+  background-color: #ffd166;
+}
+.dial-circle:hover#dial-circle-vinyl {
+  background-color: #06d6a0;
+}
+.dial-circle:hover#dial-circle-kitomba {
+  background-color: #47a1ef;
+}
+.dial-circle:hover#dial-circle-contact {
+  background-color: #ffd500;
 }
 
 .back-container {

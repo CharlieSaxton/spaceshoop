@@ -367,6 +367,15 @@ let planetsData = [
 ]
 
 
+setTimeout(()=>{
+  $(".loading-screen").addClass("fade");
+  setTimeout(()=>{
+    $(".loading-screen").hide();
+  }, 500)
+}, 3000)
+
+let openPage = null;
+
 let loading = true;
 let paused = false;
 setTimeout(() =>{
@@ -696,26 +705,39 @@ window.addEventListener('touchmove', (e) => {
     move(touch.pageX, touch.pageY)
   }
 });
+$('.dial-circle').click(e =>{
+  let target = e.target;
+  let id = $(target).attr("data-planet-overlay-id");
+  $(".planet-overlay").hide();
+  openClosePlanetOverlay($("#planet-overlay-" + id), true)
+  openPage = id
+  $("#hover-text").hide()
+  $(".back-container").show();
+});
 
+$('.dial-circle').mouseenter(function(e) {
+  let target = e.target;
+  let text = $(target).attr("data-text");
+  $("#hover-text").show()
+  $("#hover-text").text(text)
+  $(".back-container").hide();
+}).mouseleave(function(e) {      
+  $("#hover-text").hide()
+  if(!!openPage){
+    $(".back-container").show();
+  }
+});
 $(".close-button").click(function(e){
-  let target = $(e.target).closest(".planet-overlay");
+  openClosePlanetOverlay($("#planet-overlay-" + openPage), false)
+  $(".top-dial").css("background-color", "transparent")
   paused = false;
-  console.log('here')
-  // $(target).removeClass('enter');
-  // $(target).addClass('exit');
-  // setTimeout(()=>{
-  //   $(target).hide();
-
-  // }, 600)
-
-  openClosePlanetOverlay($(target), false)
-    
- 
+  openPage = null;
   setTimeout(()=>{
     paused = false;
   }, 1200)
- 
-
+  setTimeout(()=>{
+    $(".back-container").hide();
+  }, 400)
   if(tutorialStage = 2){
     tutorialStage = 3;
     $("#tutorial").text('Well done! Thats all you need to know. Have fun!')
@@ -806,24 +828,27 @@ function animate() {
         }
       }
   
-      planetsBounds.forEach(planet => {
+      planets.forEach(planet => {
         planet.rotation.y = planet.rotation.y + planetRotationSpeed
+      });
+
+      planetsBounds.forEach(planetBounds => {
+
         if(!loading){
           var playerBB = new THREE.Box3().setFromObject(playerBounds)
-          var planetBB = new THREE.Box3().setFromObject(planet);
+          var planetBB = new THREE.Box3().setFromObject(planetBounds);
           var inPlanetBounds = planetBB.containsBox(playerBB);
           if(inPlanetBounds){
-          
-            openClosePlanetOverlay($("#planet-overlay-" + planet.userData.planetName), true)
-    
+            openClosePlanetOverlay($("#planet-overlay-" + planetBounds.userData.planetName), true)
+            openPage = planetBounds.userData.planetName
             setTimeout(()=>{
+              $(".back-container").show();
               $("#joystick").hide();
               cameraGroup.rotation.set(0,0,0);
               playerGroup.rotation.set(playerGroup.rotation.x, 0, playerGroup.rotation.z)
-              playerGroup.position.set(planet.position.x, playerGroup.position.y, planet.position.z - 100)
+              playerGroup.position.set(planetBounds.position.x, playerGroup.position.y, planetBounds.position.z - 100)
               paused = true;
-            }, 600)
-       
+            }, 500)
           }
         }
        
@@ -857,6 +882,7 @@ function openClosePlanetOverlay(target, open){
 function planetOverlayAnimation(open){
   for(let i = 1; i < 4; i++){
     if(open){
+      $(".top-dial").css("background-color", "#08060f")
       setTimeout(()=>{
         $("#planet-overlay-animation-" + i).show();
         $("#planet-overlay-animation-" + i).removeClass('exit');

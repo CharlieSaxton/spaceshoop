@@ -14,6 +14,30 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script type="module" src="main.js"></script>
 
+    <div class="loading-screen">
+        <span>
+            <p>CREATED BY</p>
+            <h2>CHARLIE SAXTON</h2>
+            <div class="loading-progress"></div>
+        </span>
+       
+    </div>
+
+    <div class="top-dial-container">
+        <div class="top-dial">
+            <div class="back-container close-button"  style="display: none">
+                <p>BACK</p>
+            </div>
+            <div class="dial-circle" id="dial-circle-about" data-colour="#ef476f" data-text="ABOUT ME" data-planet-overlay-id="about"></div>
+            <div class="dial-circle dial-circle-mid" id="dial-circle-droppah" data-colour="#ffd166" data-text="DROPPAH" data-planet-overlay-id="droppah"></div>
+            <div class="dial-circle dial-circle-top"  id="dial-circle-vinyl" data-colour="#06d6a0" data-text="VINYL" data-planet-overlay-id="vinyl"></div>
+            <div class="dial-circle dial-circle-mid" id="dial-circle-kitomba" data-colour="#47a1ef" data-text="KITOMBA" data-planet-overlay-id="kitomba"></div>
+            <div class="dial-circle"  id="dial-circle-contact" data-colour="#ffd500" data-text="CONTACT ME" data-planet-overlay-id="contact"></div>
+            <p id="hover-text" style="display: none"></p>
+        </div>
+    </div>
+   
+
     <div id="joystick">
         <div id="moving-touch-dot"></div>
     </div>
@@ -28,19 +52,6 @@
     <div id="planet-overlay-about" class="planet-overlay exit">
         <div class="scroll-container">
             <div class="inner-container">
-                <div class="flex-center">
-                    <div class="top-dial">
-                        <div class="back-container close-button">
-                            <p>BACK</p>
-                        </div>
-                        <div class="dial-circle" style="background-color: #ef476f"></div>
-                        <div class="dial-circle dial-circle-mid" id="mid-1"></div>
-                        <div class="dial-circle dial-circle-top"></div>
-                        <div class="dial-circle dial-circle-mid" id="mid-2"></div>
-                        <div class="dial-circle" ></div>
-                    </div>
-                </div>
-    
                 <div class="flex-center">
                     <div class="header-circle" style="background-color: #ef476f"></div>
                     <svg viewBox="0 0 100 100" width="100" height="100">
@@ -75,19 +86,7 @@
     <div id="planet-overlay-droppah" class="planet-overlay exit">
         <div class="scroll-container">
             <div class="inner-container">
-                <div class="flex-center">
-                    <div class="top-dial">
-                        <div class="back-container close-button">
-                            <p>BACK</p>
-                        </div>
-                        <div class="dial-circle"></div>
-                        <div class="dial-circle dial-circle-mid" id="mid-1" style="background-color: #ffd166"></div>
-                        <div class="dial-circle dial-circle-top"></div>
-                        <div class="dial-circle dial-circle-mid" id="mid-2"></div>
-                        <div class="dial-circle" ></div>
-                    </div>
-                </div>
-    
+               
                 <div class="flex-center">
                     <div class="header-circle" style="background-color: #ffd166"></div>
                     <svg viewBox="0 0 100 100" width="100" height="100">
@@ -117,19 +116,7 @@
     <div id="planet-overlay-vinyl" class="planet-overlay exit">
         <div class="scroll-container">
             <div class="inner-container">
-                <div class="flex-center">
-                    <div class="top-dial">
-                        <div class="back-container close-button">
-                            <p>BACK</p>
-                        </div>
-                        <div class="dial-circle"></div>
-                        <div class="dial-circle dial-circle-mid" id="mid-1"></div>
-                        <div class="dial-circle dial-circle-top" style="background-color: #06d6a0"></div>
-                        <div class="dial-circle dial-circle-mid" id="mid-2"></div>
-                        <div class="dial-circle" ></div>
-                    </div>
-                </div>
-
+               
                 <div class="flex-center">
                     <div class="header-circle" style="background-color: #06d6a0"></div>
                     <svg viewBox="0 0 100 100" width="100" height="100">
@@ -163,18 +150,7 @@
     <div id="planet-overlay-kitomba" class="planet-overlay exit">
         <div class="scroll-container">
             <div class="inner-container">
-                <div class="flex-center">
-                    <div class="top-dial">
-                        <div class="back-container close-button">
-                            <p>BACK</p>
-                        </div>
-                        <div class="dial-circle"></div>
-                        <div class="dial-circle dial-circle-mid" id="mid-1"></div>
-                        <div class="dial-circle dial-circle-top"></div>
-                        <div class="dial-circle dial-circle-mid" id="mid-2" style="background-color: #47a1ef"></div>
-                        <div class="dial-circle" ></div>
-                    </div>
-                </div>
+              
     
                 <div class="flex-center">
                     <div class="header-circle" style="background-color: #47a1ef"></div>
@@ -211,19 +187,7 @@
     <div id="planet-overlay-contact" class="planet-overlay exit">
         <div class="scroll-container">
             <div class="inner-container">
-                <div class="flex-center">
-                    <div class="top-dial">
-                        <div class="back-container close-button">
-                            <p>BACK</p>
-                        </div>
-                        <div class="dial-circle"></div>
-                        <div class="dial-circle dial-circle-mid" id="mid-1"></div>
-                        <div class="dial-circle dial-circle-top"></div>
-                        <div class="dial-circle dial-circle-mid" id="mid-2"></div>
-                        <div class="dial-circle" style="background-color: #ffd500"></div>
-                    </div>
-                </div>
-    
+             
                 <div class="flex-center">
                     <div class="header-circle" style="background-color: #ffd500"></div>
                     <svg viewBox="0 0 100 100" width="100" height="100">
